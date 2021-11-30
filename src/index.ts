@@ -18,7 +18,7 @@ const run = async () => {
 
 	console.log('iterating')
 	for (const i of await fs.readdir(input.artifactPath)) {
-		console.log(i)
+		console.log('PATH:', i)
 	}
 
 	const outContract = {
