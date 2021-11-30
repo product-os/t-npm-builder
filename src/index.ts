@@ -1,74 +1,37 @@
-import { core } from '@balena/jellyfish-types';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as YAML from 'yaml';
-import { Input, Result } from './types';
+import { createOutputDir, readInput, writeOutputs } from './transformer';
+import * as fs from 'fs/promises'
 
-const getEnvOrFail = (envVar: string) => {
-	const env = process.env[envVar];
-	if (!env) {
-		console.log(`required env var ${envVar} was not set`);
-		process.exit(1);
+console.log('Template Transformer starting');
+
+const run = async () => {
+	const input = await readInput();
+	console.log('input:', input.contract);
+	console.log('input directory:', input.artifactPath);
+	const outputDir = await createOutputDir();
+	console.log('output directory:', outputDir);
+
+	// TODO your code goes here. You can
+	// - inspect the input contract
+	// - process the artifact that you can find in the artifactPath
+	//   - note that the input folder is read-only!
+	// - produce some new artifact and place it in `outputDir`
+
+	console.log('iterating')
+	for (const i of await fs.readdir(input.artifactPath)) {
+		console.log(i)
 	}
-	return env;
-};
 
-// worker exposes this
-const outputManifestPath = getEnvOrFail('OUTPUT');
-const inputManifestPath = getEnvOrFail('INPUT');
-
-const inputDir = path.dirname(inputManifestPath);
-const outDir = path.dirname(outputManifestPath);
-
-let outputs = 0;
-export const createOutputDir = async () => {
-	outputs++;
-	const outputDir = path.join(outDir, `result-artifacts${outputs}`);
-	await fs.promises.mkdir(outputDir, { recursive: true });
-	return outputDir;
-};
-
-export const readInput = async () => {
-	const inManifest: Input = YAML.parse(
-		(await fs.promises.readFile(inputManifestPath)).toString(),
-	);
-	// make path absolute to make handling for users easier
-	inManifest.input.artifactPath = path.join(
-		inputDir,
-		inManifest.input.artifactPath,
-	);
-	return inManifest.input;
-};
-
-export const writeOutputs = async (
-	results: Array<{
-		contract: Omit<core.ContractDefinition, 'slug'>;
-		artifactType: 'artifact' | 'image' | 'none';
-		path: string;
-	}>,
-) => {
-	const result: Result = {
-		results: results.map((r) => ({
-			contract: r.contract,
-			...mapArtifact(r.artifactType, r.path),
-		})),
+	const outContract = {
+		type: 'type-my-out-type@1.2.3',
+		data: {},
 	};
-	console.log('result:', result);
-	await fs.promises.writeFile(outputManifestPath, JSON.stringify(result));
+
+	await writeOutputs([
+		{ contract: outContract, artifactType: 'artifact', path: outputDir },
+	]);
 };
 
-const mapArtifact = (artifactType: string, outputDir: string) => {
-	switch (artifactType) {
-		case 'artifact':
-			return {
-				artifactPath: path.relative(outDir, outputDir),
-			};
-		case 'image':
-			return {
-				imagePath: path.relative(outDir, path.join(outputDir, 'image.tar')),
-			};
-		default:
-			console.log('no artifact produced for', outputDir);
-			return {};
-	}
-};
+run().catch((err) => {
+	console.log('ERROR IN TRANSFORMER', err);
+	process.exit(1);
+});
