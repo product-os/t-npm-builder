@@ -15,5 +15,6 @@
     "build": "tsc",
     "lint-fix": "balena-lint --fix src"
   },
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {}
 }
