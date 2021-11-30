@@ -26,4 +26,4 @@ data:
           version:
             # only run on draft versions (aka pre-releases). You probably don't want to change this
             pattern: ^[^+]*-
-slug: service-source-product-os-transformer-template
+slug: service-source-product-os-npm-builder
