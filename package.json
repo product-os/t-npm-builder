@@ -1,6 +1,6 @@
 {
   "name": "transformer-template",
-  "version": "1.0.2",
+  "version": "0.0.5",
   "description": "",
   "private": true,
   "main": "build/index.js",
@@ -16,5 +16,8 @@
     "lint-fix": "balena-lint --fix src"
   },
   "license": "UNLICENSED",
-  "dependencies": {}
+  "dependencies": {},
+  "versionist": {
+    "publishedAt": "2021-12-01T13:32:28.428Z"
+  }
 }
