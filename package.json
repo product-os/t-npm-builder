@@ -16,7 +16,9 @@
     "lint-fix": "balena-lint --fix src"
   },
   "license": "UNLICENSED",
-  "dependencies": {},
+  "dependencies": {
+    "zx": "^4.2.0"
+  },
   "versionist": {
     "publishedAt": "2021-12-01T17:03:06.835Z"
   }
