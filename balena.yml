@@ -1,4 +1,4 @@
-type: transformer@1.0.0
+type: type-product-os-t-service-source@1.0.1
 name: NPM Builder
 version: 0.0.6
 data:
