@@ -1,5 +1,7 @@
 import { createOutputDir, readInput, writeOutputs } from './transformer';
 import * as fs from 'fs/promises'
+import * as zx from 'zx'
+import { ProcessOutput } from 'zx'
 
 console.log('Template Transformer starting');
 
@@ -21,14 +23,36 @@ const run = async () => {
 		console.log('PATH:', i)
 	}
 
-	const outContract = {
-		type: 'type-my-out-type@1.2.3',
-		data: {},
-	};
+	try {
+		// cd in
+		zx.$`cd ${input.artifactPath}`
 
-	await writeOutputs([
-		{ contract: outContract, artifactType: 'artifact', path: outputDir },
-	]);
+		// Install packages
+		zx.$`npm install`
+
+		// Build
+		zx.$`npm run build`
+
+		console.log('iterating')
+		for (const i of await fs.readdir(input.artifactPath)) {
+			console.log('PATH:', i)
+		}
+
+		const outContract = {
+			type: 'type-my-out-type@1.2.3',
+			data: {},
+		};
+
+		await writeOutputs([
+			{ contract: outContract, artifactType: 'artifact', path: outputDir },
+		]);
+	} catch (error) {
+		if (error instanceof ProcessOutput) {
+			console.error('Command returned an error!')
+			console.error(error.toString())
+		}
+		// TODO: Throw an error contract or something
+	}
 };
 
 run().catch((err) => {
