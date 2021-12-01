@@ -22,7 +22,7 @@ data:
         properties:
           type:
             # this runs your transformer on all instances of the same major version of the input type
-            pattern: product-os-type-t-node-module-source@1.*
+            pattern: product-os-type-t-node-module-source@0.*
           version:
             # only run on draft versions (aka pre-releases). You probably don't want to change this
             pattern: ^[^+]*-
