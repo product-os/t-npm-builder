@@ -1,6 +1,6 @@
 type: transformer@1.0.0
 name: NPM Builder
-version: 0.0.5
+version: 0.0.6
 data:
   # The platforms the transformer is built for. Is primarily useful if you do platform-specific
   # things and want maximum performance. (The workers have Qemu and thus can run images for any platform)
