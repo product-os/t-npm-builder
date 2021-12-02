@@ -31,7 +31,7 @@ const run = async () => {
 		zx.$`npm install`
 
 		// Build
-		zx.$`npm run build`
+		zx.$`npm run build --outDir ${outputDir}`
 
 		console.log('iterating')
 		for (const i of await fs.readdir(input.artifactPath)) {
@@ -39,8 +39,10 @@ const run = async () => {
 		}
 
 		const outContract = {
-			type: 'type-my-out-type@1.2.3',
-			data: {},
+			type: 'type-product-os-t-type-source@1.2.1',
+			data: {
+				packageName: input.contract.data.packageName
+			},
 		};
 
 		await writeOutputs([

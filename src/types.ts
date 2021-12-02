@@ -2,7 +2,7 @@ import { core } from '@balena/jellyfish-types';
 
 type InData = {
 	// everything in here should be part of the input filter or the input type's schema
-	someProperty: string;
+	packageName: string;
 };
 
 interface TransformerData {
