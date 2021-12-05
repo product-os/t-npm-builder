@@ -18,11 +18,6 @@ const run = async () => {
 	//   - note that the input folder is read-only!
 	// - produce some new artifact and place it in `outputDir`
 
-	console.log('iterating')
-	for (const i of await fs.readdir(input.artifactPath)) {
-		console.log('PATH:', i)
-	}
-
 	try {
 		// cd in
 		zx.$`cd ${input.artifactPath}`
@@ -30,13 +25,9 @@ const run = async () => {
 		// Install packages
 		zx.$`npm install`
 
+		console.log('[NPM BUILDER TF] Building package...')
 		// Build
 		zx.$`npm run build -- --outDir ${outputDir}`
-
-		console.log('iterating')
-		for (const i of await fs.readdir(input.artifactPath)) {
-			console.log('PATH:', i)
-		}
 
 		const outContract = {
 			type: 'type-product-os-t-type-source@1.2.1',
