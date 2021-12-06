@@ -1,6 +1,6 @@
 {
   "name": "transformer-template",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "",
   "private": true,
   "main": "build/index.js",
@@ -20,6 +20,6 @@
     "zx": "^4.2.0"
   },
   "versionist": {
-    "publishedAt": "2021-12-05T20:41:13.071Z"
+    "publishedAt": "2021-12-06T16:14:30.826Z"
   }
 }
