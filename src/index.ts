@@ -1,5 +1,4 @@
 import { createOutputDir, readInput, writeOutputs } from './transformer';
-import * as fs from 'fs/promises'
 import * as zx from 'zx'
 import { ProcessOutput } from 'zx'
 
