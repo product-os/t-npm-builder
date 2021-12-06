@@ -30,7 +30,7 @@ const run = async () => {
 		zx.$`npm run build -- --outDir ${outputDir}`
 
 		const outContract = {
-			type: 'type-product-os-t-type-source@1.2.1',
+			type: 'type-product-os-t-node-module@1.0.7',
 			data: {
 				packageName: input.contract.data.packageName
 			},
