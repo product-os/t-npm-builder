@@ -19,14 +19,18 @@ const run = async () => {
 
 	try {
 		// cd in
-		zx.$`cd ${input.artifactPath}`
+		await zx.$`cd ${input.artifactPath}`
 
 		// Install packages
-		zx.$`npm install`
+		await zx.$`npm install`
 
 		console.log('[NPM BUILDER TF] Building package...')
 		// Build
-		zx.$`npm run build -- --outDir ${outputDir}`
+		await zx.$`npm run build`
+
+		await zx.$`cd ..`
+
+		await zx.$`cp -r ${input.artifactPath} ${outputDir}`
 
 		const outContract = {
 			type: 'type-product-os-t-node-module@1.0.7',
@@ -42,8 +46,9 @@ const run = async () => {
 		if (error instanceof ProcessOutput) {
 			console.error('Command returned an error!')
 			console.error(error.toString())
+		} else {
+			throw error
 		}
-		// TODO: Throw an error contract or something
 	}
 };
 
