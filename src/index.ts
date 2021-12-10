@@ -46,8 +46,9 @@ const run = async () => {
 		if (error instanceof ProcessOutput) {
 			console.error('Command returned an error!')
 			console.error(error.toString())
+		} else {
+			throw error
 		}
-		// TODO: Throw an error contract or something
 	}
 };
 
