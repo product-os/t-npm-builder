@@ -23,7 +23,7 @@ const run = async () => {
 		// Build
 		const o1 = await zx.$`cp -r ${input.artifactPath} ${outputDir}`
 		console.log(o1.stdout, o1.stderr)
-		const o2 = await zx.$`cd ${input.artifactPath}`
+		const o2 = await zx.$`cd ${outputDir}`
 		console.log(o2.stdout, o2.stderr)
 		const o3 = await zx.$`npm install`
 		console.log(o3.stdout, o3.stderr)
