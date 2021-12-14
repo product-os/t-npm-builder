@@ -23,12 +23,8 @@ const run = async () => {
 		// Build
 		const o1 = await zx.$`cp -r ${input.artifactPath} ${outputDir}`
 		console.log(o1.stdout, o1.stderr)
-		const o2 = await zx.$`cd ${outputDir}`
-		console.log(o2.stdout, o2.stderr)
-		const o3 = await zx.$`npm install`
+		const o3 = await zx.$`cd ${outputDir} && npm install && npm run build`
 		console.log(o3.stdout, o3.stderr)
-		const o4 = await zx.$`npm run build`
-		console.log(o4.stdout, o4.stderr)
 
 		const outContract = {
 			type: 'type-product-os-t-node-module@1.0.7',
