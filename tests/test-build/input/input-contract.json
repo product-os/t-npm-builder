@@ -1,0 +1,13 @@
+{
+  "id": "d5fb3628-c609-4848-a258-c1300f3d58bd",
+  "data": {
+      "packageName": "@balena/test-package",
+      "$transformer": {}
+  },
+  "loop": null,
+  "name": "Test Package",
+  "slug": "type-product-os-t-node-module-source-product-os-test-npm-package",
+  "tags": [],
+  "type": "type-product-os-t-node-module-source@0.0.3",
+  "version": "0.0.3"
+}
