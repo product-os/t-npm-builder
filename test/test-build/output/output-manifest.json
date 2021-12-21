@@ -1,3 +1,1 @@
-{
-  "hey": "ho"
-}
+{"results":[{"contract":{"type":"type-product-os-t-node-module@1.0.7","data":{"packageName":"@balena/test-package"}},"artifactPath":"result-artifacts1"}]}
