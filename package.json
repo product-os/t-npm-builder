@@ -1,6 +1,6 @@
 {
   "name": "t-npm-builder",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "description": "",
   "private": true,
   "main": "build/index.js",
@@ -20,6 +20,6 @@
     "zx": "^4.2.0"
   },
   "versionist": {
-    "publishedAt": "2021-12-21T14:37:57.927Z"
+    "publishedAt": "2021-12-21T14:57:49.403Z"
   }
 }
